@@ -5,12 +5,18 @@
 
     <groupId>eu.jpangolin</groupId>
     <artifactId>friendlyimp</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>Friendly Imp</name>
 
+    <subprojects>
+        <subproject>IoImp</subproject>
+    </subprojects>
+
+
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <plugin.maven.compiler>3.15.0</plugin.maven.compiler>
         <plugin.maven.jar>3.5.0</plugin.maven.jar>
@@ -19,7 +25,36 @@
         <plugin.maven.gpg>3.2.8</plugin.maven.gpg>
         <plugin.maven.surefire>3.5.5</plugin.maven.surefire>
         <plugin.mojo.maven.dependency>2.21.0</plugin.mojo.maven.dependency>
+        <lib.slf4j>2.0.17</lib.slf4j>
+        <lib.apache.common.codec>1.21.0</lib.apache.common.codec>
+
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Source: https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${lib.slf4j}</version>
+
+            </dependency>
+            <!-- Source: https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${lib.slf4j}</version>
+            </dependency>
+
+            <!-- Source: https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${lib.apache.common.codec}</version>
+                <scope>compile</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <pluginManagement>
@@ -29,34 +64,13 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>${plugin.maven.enforcer}</version>
-                    <executions>
-                        <execution>
-                            <id>enforce-maven</id>
-                            <goals>
-                                <goal>enforce</goal>
-                            </goals>
-                            <configuration>
-                                <rules>
-                                    <requireMavenVersion>
-                                        <version>4.0.0-rc-4</version>
-                                    </requireMavenVersion>
-                                </rules>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
                 <!-- Mojo dependency plugin -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
                     <version>${plugin.mojo.maven.dependency}</version>
-                    <!-- Ignore unstable versions globally -->
-                    <configuration>
-                        <ignoredVersions>
-                            <ignoredVersion>.*-M.*</ignoredVersion>
-                            <ignoredVersion>.*-alpha.*</ignoredVersion>
-                        </ignoredVersions>
-                    </configuration>
+
                 </plugin>
                 <!-- Maven resource plugin -->
                 <plugin>
@@ -90,12 +104,61 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
         <plugins>
+            <!-- Here setup maven compiler plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArgs>--enable-preview</compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>eu.jpangolin.friendlyimp.ioimp.cmd.NativeCommandExample</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Here setup Maven enforcer plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>4.0.0-rc-4</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Here setup Maven version plugin -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
+                <!-- Ignore unstable versions globally -->
+                <configuration>
+                    <ignoredVersions>
+                        <ignoredVersion>.*-M.*</ignoredVersion>
+                        <ignoredVersion>.*-alpha.*</ignoredVersion>
+                    </ignoredVersions>
+                </configuration>
             </plugin>
-
+            <!-- Here setup Maven  gpg plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
