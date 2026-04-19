@@ -35,6 +35,7 @@ import java.util.stream.Stream;
  * Abstract implementation of a native command.
  *
  * @param <T> command result type
+ * @author jTzipi
  */
 public abstract class AbstractNativeCommand<T extends INativeCommandResult> implements INativeCommand<T> {
 
@@ -78,12 +79,14 @@ public abstract class AbstractNativeCommand<T extends INativeCommandResult> impl
      * @param duration            Optional of duration of the command
      * @return The result
      */
-    public abstract T parse(String commandStdOutputStr, String commandStdErrorStr, int exitCode, Duration duration);
+    protected abstract T parse(String commandStdOutputStr, String commandStdErrorStr, int exitCode, Duration duration);
 
     @Override
     public T launch(final java.io.File cmdDirectory, final long timeout, final TimeUnit timeUnit) throws UnsupportedOperationException, IOException, InterruptedException {
         // Create the process builder with the always non nun nonempty command arguments
         ProcessBuilder pb = new ProcessBuilder(cmdArgList);
+        LOG.info("<<launch>> command '{}'", cmdArgList);
+
         // user set working dir
         if (null != cmdDirectory) {
             LOG.info("<<launch>> work dir set -> '{}'", cmdDirectory);

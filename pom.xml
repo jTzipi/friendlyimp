@@ -22,6 +22,7 @@
         <plugin.maven.jar>3.5.0</plugin.maven.jar>
         <plugin.maven.resource>3.5.0</plugin.maven.resource>
         <plugin.maven.enforcer>3.6.2</plugin.maven.enforcer>
+        <plugin.maven.dependency>3.10.0</plugin.maven.dependency>
         <plugin.maven.gpg>3.2.8</plugin.maven.gpg>
         <plugin.maven.surefire>3.5.5</plugin.maven.surefire>
         <plugin.mojo.maven.dependency>2.21.0</plugin.mojo.maven.dependency>
@@ -90,6 +91,12 @@
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${plugin.maven.jar}</version>
                 </plugin>
+                <!-- Maven dependency plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${plugin.maven.dependency}</version>
+                </plugin>
                 <!-- Maven surefire plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -145,6 +152,11 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+
             </plugin>
             <!-- Here setup Maven version plugin -->
             <plugin>

@@ -16,14 +16,16 @@
 
 package eu.jpangolin.friendlyimp.ioimp.cmd;
 
+import eu.jpangolin.friendlyimp.ioimp.cmd.linux.LsblkCommand;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.time.Duration;
-import java.util.Optional;
+
 
 /**
  * Provide some examples for native commands.
+ *
+ * @author jTzipi
  */
 public final class NativeCommandExample {
 
@@ -32,12 +34,13 @@ public final class NativeCommandExample {
     private NativeCommandExample() {
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
 
         LOG.warn("Launch :: LSBLK");
-        LsblkCommandExample sce = new LsblkCommandExample();
+        LsblkCommand lsblkCommand = LsblkCommand.ofDefault();
         try {
-            sce.launch();
+            INativeCommandResult ncr = lsblkCommand.launch();
+            LOG.warn("Result - '{}'", ncr);
         } catch (IOException e) {
 
             LOG.error("Failed to run LSBLK ->", e);
@@ -47,23 +50,5 @@ public final class NativeCommandExample {
 
     }
 
-    public record Lsblk(String raw, int exitCode, Duration elapsed,
-                        Optional<String> error) implements INativeCommandResult {
 
-    }
-
-    public static final class LsblkCommandExample extends AbstractNativeCommand<Lsblk> {
-
-        LsblkCommandExample() {
-            super("lsblk");
-        }
-
-
-        @Override
-        public Lsblk parse(String commandStdOutputStr, String commandStdErrorStr, int exitCode, Duration duration) {
-
-
-            return new Lsblk(commandStdOutputStr, exitCode, duration, Optional.ofNullable(commandStdErrorStr));
-        }
-    }
 }
