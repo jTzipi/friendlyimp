@@ -356,7 +356,7 @@ public final class LsblkCommand extends AbstractNativeCommand<LsblkCommand.Lsblk
 
         for (LsblkOutputOptionArg lsblkColumn : EnumSet.of(TYPE, FS_TYPE, FS_AVAILABLE, SIZE, MOUNTPOINT, SERIAL, NAME, LABEL, UUID)) {
             String cgrp = lsblkColumn.get().toLowerCase();
-            LOG.info("<<<<parseLsblkRow>> Suche nach CGrp '{}'", cgrp);
+            LOG.info("<<parseLsblkRow>> look for CGrp '{}'", cgrp);
             ret.put(lsblkColumn, matcher.group(cgrp));
         }
 
