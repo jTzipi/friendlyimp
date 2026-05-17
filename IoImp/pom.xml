@@ -5,13 +5,14 @@
     <modelVersion>4.1.0</modelVersion>
 
     <parent>
-        <groupId>eu.jpangolin</groupId>
-        <artifactId>friendlyimp</artifactId>
+        <groupId>eu.jpangolin.friendlyimp</groupId>
+        <artifactId>parent</artifactId>
     </parent>
 
 
     <artifactId>IoImp</artifactId>
-
+    <packaging>jar</packaging>
+    <name>Friendly Imp IO Helper</name>
 
     <dependencies>
         <dependency>

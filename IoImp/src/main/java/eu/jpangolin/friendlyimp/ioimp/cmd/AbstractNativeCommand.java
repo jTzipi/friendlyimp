@@ -42,6 +42,7 @@ public abstract class AbstractNativeCommand<T extends INativeCommandResult> impl
     // LOG
     private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(AbstractNativeCommand.class);
 
+    // The base command like 'ls'
     private final String baseCommand;
     // The command with all of its arguments
     private final List<String> cmdArgList;
@@ -49,7 +50,7 @@ public abstract class AbstractNativeCommand<T extends INativeCommandResult> impl
     ///
     /// AbstractNativeCommand constructor.
     ///
-    /// @param baseCommandStr      Base command name like `ls -l`
+    /// @param baseCommandStr      Base command name like `ls`
     /// @param commandArgumentList Arguments/Option List (optional)
     ///
     protected AbstractNativeCommand(final String baseCommandStr, final List<String> commandArgumentList) {

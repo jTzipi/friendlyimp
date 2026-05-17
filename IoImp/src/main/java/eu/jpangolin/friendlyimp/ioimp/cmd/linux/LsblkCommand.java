@@ -82,7 +82,7 @@ public final class LsblkCommand extends AbstractNativeCommand<LsblkCommand.Lsblk
     ///   - `-J, --json`                im JSON-Format ausgeben
     ///   - `-M, --merge`               gruppiert die Elterneinträge von Unterbäumen (verwendbar für RAIDs, Multi-Pfad)
     ///   - `-O, --output-all`          alle Spalten ausgeben
-    ///   - `-P, --pairs`          Ausgabeformat Schlüssel="Wert" verwenden
+    ///   - `-P, --pairs`               Ausgabeformat Schlüssel="Wert" verwenden
     ///   - `-S, --scsi`           Information zu SCSI-Geräten ausgeben
     ///   - `-T, --tree[=<Spalte>]` im Baumformat ausgeben
     ///   - `-a, --all`            alle Geräte ausgeben
@@ -108,7 +108,29 @@ public final class LsblkCommand extends AbstractNativeCommand<LsblkCommand.Lsblk
     ///   - `-V, --version`        Version anzeigen
     public enum LsblkOption implements INativeCommandOption {
 
-        NO_EMPTY("noempty", "A"), DISCARD("discard", "D"), DE_DUP("dedup", "E"), INCLUDE("include", "I"), JSON("json", "J"), MERGE("merge", "M"), OUTPUT_ALL("output-all", "O"), PAIRS("pairs", "P"), SCSI("scsi", "S"), TREE("tree", "T"), ALL("all", "a"), BYTES("bytes", "b"), NO_DEPS("nodeps", "d"), EXCLUDE("exclude", "e"), FS("fs", "f"), ASCII("ascii", "i"), LIST("list", "l"), PERMS("perms", "m"), NO_HEADINGS("noheadings", "n"), OUTPUT("output", "o"), PATHS("paths", "p");
+        ///
+        NO_EMPTY("noempty", "A"),
+        DISCARD("discard", "D"),
+        DE_DUP("dedup", "E"),
+        INCLUDE("include", "I"),
+        JSON("json", "J"),
+        MERGE("merge", "M"),
+        OUTPUT_ALL("output-all", "O"),
+        PAIRS("pairs", "P"),
+        SCSI("scsi", "S"),
+        TREE("tree", "T"),
+        ALL("all", "a"),
+        BYTES("bytes", "b"),
+        NO_DEPS("nodeps", "d"),
+        EXCLUDE("exclude", "e"),
+        FS("fs", "f"),
+        ASCII("ascii", "i"),
+        LIST("list", "l"),
+        PERMS("perms", "m"),
+        NO_HEADINGS("noheadings", "n"),
+        OUTPUT("output", "o"),
+        PATHS("paths", "p");
+
 
         private final String fn;
         private final String sn;
